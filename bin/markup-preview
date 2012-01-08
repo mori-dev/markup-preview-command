@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.dirname(__FILE__) + '/../lib')
+
+require 'rubygems' unless defined? Gem
+require 'markup-preview-command'
+require 'slop'
+
+def main
+
+  help = <<-EOF
+useage:
+markup-preview -f filepath
+Or,
+cat some.md | markup-preview -m markdown
+  EOF
+
+  opts = Slop.parse do
+    on :h, :help, help, :tail => true do
+      puts help
+      exit
+    end
+    on :m,  :markup=,   'markup'
+    on :f,  :filepath=, 'filepath'
+    on :d,  :debug,     'Enable debug'
+  end
+
+  Markup::Preview::Command::Render.execute(opts)
+
+end
+
+main

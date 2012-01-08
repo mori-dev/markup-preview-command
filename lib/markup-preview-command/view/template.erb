@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-type">
+    <title>Preview</title>
+    <style>
+      <%= template_css %>
+      <%= gollum_css %>
+    </style>
+  </head>
+  <body>
+    <div class="page" id="wiki-wrapper">
+      <div id="wiki-content">
+        <div class="wrap">
+          <div class="gollum-markdown-content" id="wiki-body">
+            <div id="template">
+              <%= render_result %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
