@@ -1,11 +1,11 @@
 require 'rubygems' unless defined? Gem
 require 'markup-preview-command/version'
-require 'markup-preview-command/util'
+require 'markup-preview-command/util/util'
 
 module Markup::Preview::Command
   class Render
 
-    require 'markup/markup'
+    require 'github/markup'
     require 'fileutils'
     require 'tmpdir'
 
@@ -18,6 +18,7 @@ module Markup::Preview::Command
     def initialize(opts)
       @content = nil
       @format  = nil
+      @browser = false
       parse_options(opts)
     end
 
@@ -27,15 +28,20 @@ module Markup::Preview::Command
 
     def execute
       create_html
-      open_browser
-      exit($?.exitstatus || 0)
+      if @browser
+        open_browser
+        exit($?.exitstatus || 0)
+      else
+        puts File.read(TMPFILE)
+        exit 0
+      end
     end
 
 
     private
 
     def create_html
-      render_result = Markup::Markup.render("dummy.#{@format}", @content)
+      render_result = GitHub::Markup.render("dummy.#{@format}", @content)
       template_css  = File.read(File.join(File.dirname(__FILE__), 'markup-preview-command', 'css', 'template.css'))
       gollum_css    = File.read(File.join(File.dirname(__FILE__), 'markup-preview-command', 'css', 'gollum.css'))
       html          = ERB.new(File.read(File.join(File.dirname(__FILE__), 'markup-preview-command', 'view', 'template.erb')))
@@ -53,8 +59,11 @@ module Markup::Preview::Command
       extensions = ['md','mkd','mkdn','mkdn','mdown','markdown','org','pod',
                     'creole','rst','rest','textile','rdoc','mediawiki']
 
-      if opts.markup?
-        @format = opts[:markup].downcase
+
+      @format = opts[:markup].downcase if opts.markup?
+
+      if opts.output? && (opts[:output] === 'browser')
+        @browser = true
       end
 
       if opts.filepath? && (File::extname(opts[:filepath]) != "")
@@ -65,11 +74,7 @@ module Markup::Preview::Command
         end
       end
 
-      if opts.filepath?
-        @content = File.read(opts[:filepath])
-      else
-        @content = $stdin.read
-      end
+      @content = opts.filepath? ? File.read(opts[:filepath]) : $stdin.read
 
     end
   end

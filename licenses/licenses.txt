@@ -1,0 +1,6 @@
+markup-preview-command (MIT License)
+https://github.com/wakaran/markup-preview-command/blob/master/LICENSE
+
+--
+Gollum (MIT License)
+https://github.com/github/gollum/blob/master/LICENSE

@@ -26,29 +26,29 @@ Installation
 
     gem install markup-preview-command
 
-
 Usage
 -----
 
-    markup-preview --filepath foo --markup markdown
-    markup-preview --filepath foo.md
-    markup-preview --f foo.md
+    markup-preview --filepath foo --markup markdown --output browser
+    markup-preview --filepath foo.md --output browser
+    markup-preview --f foo.md -o browser
     cat bar.md | markup-preview -m markdown
 
 Or, more realistically:
 
+    Put markup-preview.el in your load-path.
     cp path/to/markup-preview-command/etc/markup-preview.el ${HOME}/.emacs.d/elisp/markup-preview.el
 
-    And in your emacs config file,
-
-    (add-to-list 'load-path "~/.emacs.d/elisp")
+    Add following code.
     (require 'markup-preview)
-
-    Then
-
-    M-x markup-preview
+    (global-set-key (kbd "M--") 'markup-preview) ; key bind example
 
 Contributing
 ------------
 
-Fork it.
+Fork, fix, then send me a pull request.
+
+Copyright
+------------
+
+Copyright (c) mori_dev. See LICENSE for details.

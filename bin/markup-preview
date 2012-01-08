@@ -10,9 +10,9 @@ def main
 
   help = <<-EOF
 useage:
-markup-preview -f filepath
-Or,
-cat some.md | markup-preview -m markdown
+markup-preview -f path/to/foo.md -o browser
+or,
+cat foo.md | markup-preview -m markdown -o browser
   EOF
 
   opts = Slop.parse do
@@ -22,7 +22,7 @@ cat some.md | markup-preview -m markdown
     end
     on :m,  :markup=,   'markup'
     on :f,  :filepath=, 'filepath'
-    on :d,  :debug,     'Enable debug'
+    on :o,  :output=,   'set "-o browser" if see result by browser'
   end
 
   Markup::Preview::Command::Render.execute(opts)
