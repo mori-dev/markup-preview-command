@@ -4,31 +4,7 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 
 require 'rubygems' unless defined? Gem
 require 'markup-preview-command'
-require 'slop'
 
 Encoding.default_external = Encoding::UTF_8 if RUBY_VERSION =~ /1.9/
 
-def main
-
-  help = <<-EOF
-useage:
-markup-preview -f path/to/foo.md -o browser
-or,
-cat foo.md | markup-preview -m markdown -o browser
-  EOF
-
-  opts = Slop.parse do
-    on :h, :help, help, :tail => true do
-      puts help
-      exit
-    end
-    on :m,  :markup=,   'markup'
-    on :f,  :filepath=, 'filepath'
-    on :o,  :output=,   'set "-o browser" if see result by browser'
-  end
-
-  Markup::Preview::Command::Render.execute(opts)
-
-end
-
-main
+Markup::Preview::Command::Runner.run(ARGV)
