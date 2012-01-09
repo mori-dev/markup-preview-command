@@ -55,7 +55,6 @@ module Markup::Preview::Command
 
   end
 
-
   class Options
 
     require 'slop'
@@ -74,7 +73,7 @@ module Markup::Preview::Command
       usage if argv.length == 0
 
       help = <<-EOF
-useage:
+USEAGE:
 markup-preview -f path/to/foo.md -o browser
 or,
 cat foo.md | markup-preview -m markdown -o browser
@@ -102,13 +101,16 @@ cat foo.md | markup-preview -m markdown -o browser
       if opts.filepath? && (File::extname(opts[:filepath]) != "")
         @format = File::extname(opts[:filepath])[1..-1]
         unless extensions.include? @format
-          warn "invalid extension. \nvalid extensions: #{extensions.join(', ')}"
-          exit 1
+          raise "unsupported extension. \nsupported extensions: #{extensions.join(', ')}"
         end
       end
 
+      raise 'File not found.' unless File.exist? opts[:filepath]
       @content = opts.filepath? ? File.read(opts[:filepath]) : $stdin.read
 
+    rescue => e
+      $stderr.puts e.message
+      exit 1
     end
 
     def usage
