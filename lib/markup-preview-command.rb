@@ -13,7 +13,7 @@ module Markup::Preview::Command
     include Util
 
     TMPDIR  = File.join(Dir.tmpdir, 'markup-preview')
-    TMPFILE = File.join(TMPDIR, $$.to_s)
+    TMPFILE = File.join(TMPDIR, $$.to_s) + '.html'
     FileUtils.mkdir_p(TMPDIR) unless FileTest.directory? TMPDIR
 
 
