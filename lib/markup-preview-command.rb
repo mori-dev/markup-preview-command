@@ -44,9 +44,7 @@ module Markup::Preview::Command
       template_css  = File.read(File.join(File.dirname(__FILE__), 'markup-preview-command', 'css', 'template.css'))
       gollum_css    = File.read(File.join(File.dirname(__FILE__), 'markup-preview-command', 'css', 'gollum.css'))
       html          = ERB.new(File.read(File.join(File.dirname(__FILE__), 'markup-preview-command', 'view', 'template.erb')))
-      File.open(TMPFILE, 'w') do |f|
-        f.puts html.result(binding)
-      end
+      File.open(TMPFILE, 'w') { |f| f.puts html.result(binding) }
     end
 
     def open_browser
