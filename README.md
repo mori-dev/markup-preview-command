@@ -33,7 +33,7 @@ Usage
 
     markup-preview --filepath foo --markup markdown --output browser
     markup-preview --filepath foo.md --output browser
-    markup-preview --f foo.md -o browser
+    markup-preview -f foo.md -o browser
     cat bar.md | markup-preview -m markdown
 
 Or, more realistically:
