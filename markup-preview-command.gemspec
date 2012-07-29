@@ -3,11 +3,12 @@ $:.push File.expand_path("../lib", __FILE__)
 require "markup-preview-command/version"
 
 Gem::Specification.new do |s|
+
   s.name        = "markup-preview-command"
   s.version     = Markup::Preview::Command::VERSION
   s.authors     = ["mori_dev"]
   s.email       = ["mori.dev.asdf@gmail.com"]
-  s.homepage    = "https://github.com/wakaran/markup-preview-command"
+  s.homepage    = "https://github.com/mori-dev/markup-preview-command"
   s.summary     = %q{Previw your wiki file as local html file.}
   s.description = %q{Previw your wiki file as local html file. (format: markdown, rest, textile, rdoc and so on.)}
 
@@ -27,5 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency('wikicloth', '~>0.7.0')
   s.add_dependency('rake', '~>0.9.0')
   s.add_dependency('slop', '~>2.4.0')
+  s.add_development_dependency("rspec", "~> 2.11.0")
 
 end

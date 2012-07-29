@@ -1,6 +1,8 @@
 Markup Previw Command
 =======================
 
+[![Build Status](https://secure.travis-ci.org/mori-dev/markup-preview-command.png)](http://travis-ci.org/mori-dev/markup-preview-command)
+
 We use this library on Github when rendering your README or any other
 rich text file, *When We are editing by Emacs or other editor*.
 
