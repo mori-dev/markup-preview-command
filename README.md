@@ -1,5 +1,5 @@
 Markup Previw Command
-=======================
+========================
 
 [![Build Status](https://secure.travis-ci.org/mori-dev/markup-preview-command.png)](http://travis-ci.org/mori-dev/markup-preview-command)
 
